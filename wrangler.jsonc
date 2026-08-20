@@ -1,0 +1,15 @@
+{
+  "name": "omachee",
+  "compatibility_date": "2026-08-20",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public",
+    // Any path on the domain shows the page rather than a 404 — it's a typo
+    // catcher, so /install and /docs should still land somewhere sensible.
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    { "pattern": "omachee.org/*",   "zone_name": "omachee.org" },
+    { "pattern": "*.omachee.org/*", "zone_name": "omachee.org" }
+  ]
+}
