@@ -64,15 +64,63 @@
     transition: color 0.15s cubic-bezier(0.33, 1, 0.68, 1);
   }
 
-  @media (hover: hover) { a:hover { color: var(--white); } }
+  /* Speaker button sits on the baseline next to OMARCHY. */
+  .say {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin-left: 0.3em;
+    cursor: pointer;
+    color: var(--dim);
+    vertical-align: baseline;
+    transition: color 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .say svg {
+    width: 0.7em;
+    height: 0.7em;
+    display: block;
+  }
+
+  .say:focus-visible { outline: 2px solid var(--cyan); outline-offset: 0.25em; }
+  .say.playing { color: var(--green); }
+
+  @media (hover: hover) {
+    a:hover { color: var(--white); }
+    .say:hover { color: var(--cyan); }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .say { transition: none; } }
 </style>
 </head>
 <body>
   <p>
     Yes, it's pronounced <b class="them">OMACHEE</b>,
-    but we spell it <b class="us">OMA<span class="r">R</span>CHY</b>.
+    but we spell it <b class="us">OMA<span class="r">R</span>CHY</b><button
+      class="say" type="button" aria-label="Hear it pronounced: oh-mah-chee">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+        <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+        <path d="M19 5a10 10 0 0 1 0 14"/>
+      </svg>
+    </button>.
     The R is silent.
   </p>
   <a href="https://omarchy.org/">omarchy.org&nbsp;&rarr;</a>
+  <audio id="clip" src="oh-mah-chee.mp3" preload="auto"></audio>
+  <script>
+    const button = document.querySelector('.say');
+    const clip = document.getElementById('clip');
+
+    button.addEventListener('click', () => {
+      clip.currentTime = 0;
+      clip.play().catch(() => {});
+    });
+
+    clip.addEventListener('playing', () => button.classList.add('playing'));
+    ['ended', 'pause', 'error'].forEach(e =>
+      clip.addEventListener(e, () => button.classList.remove('playing')));
+  </script>
 </body>
 </html>
