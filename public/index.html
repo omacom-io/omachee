@@ -66,21 +66,26 @@
 
   /* Speaker button sits on the baseline next to OMARCHY. */
   .say {
+    font: inherit;
     background: none;
     border: 0;
     padding: 0;
-    margin-left: 0.3em;
+    margin-left: 0.25em;
     cursor: pointer;
     color: var(--dim);
-    vertical-align: baseline;
+    vertical-align: -0.15em;
     transition: color 0.15s cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   .say svg {
-    width: 0.7em;
-    height: 0.7em;
+    width: 1em;
+    height: 1em;
     display: block;
   }
+
+  /* Keeps the word, the speaker and the full stop on one line — the period
+     was wrapping on its own. */
+  .nb { white-space: nowrap; }
 
   .say:focus-visible { outline: 2px solid var(--cyan); outline-offset: 0.25em; }
   .say.playing { color: var(--green); }
@@ -96,15 +101,15 @@
 <body>
   <p>
     Yes, it's pronounced <b class="them">OMACHEE</b>,
-    but we spell it <b class="us">OMA<span class="r">R</span>CHY</b><button
+    but we spell it <span class="nb"><b class="us">OMA<span class="r">R</span>CHY</b><button
       class="say" type="button" aria-label="Hear it pronounced: oh-mah-chee">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M11 5 6 9H2v6h4l5 4V5z"/>
         <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
         <path d="M19 5a10 10 0 0 1 0 14"/>
       </svg>
-    </button>.
+    </button>.</span>
     The R is silent.
   </p>
   <a href="https://omarchy.org/">omarchy.org&nbsp;&rarr;</a>
